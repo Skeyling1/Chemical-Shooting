@@ -24,6 +24,11 @@ color = (random.randint(0, 225), random.randint(0, 225), random.randint(0, 225))
 running = True
 while running:
     screen.fill(color)
+    font = pygame.font.SysFont('couriernew', 40)
+    text = font.render(str('HELLO'), True, (0,0,0))
+    screen.blit(text, (5, 5))
+
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
