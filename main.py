@@ -13,20 +13,25 @@ icon = pygame.image.load("img/images.jpg")
 pygame.display.set_icon(icon)
 
 target_img = pygame.image.load("img/target.png")
-target_width = 50
-target_higth = 50
+target_width = 100
+target_higth = 100
 
 target_x = random.randint(0, SCREEN_WIDTH - target_width)
 target_y = random.randint(0, SCREEN_HIGTH - target_higth)
 
 color = (random.randint(0, 225), random.randint(0, 225), random.randint(0, 225))
 
+score = 0
+
 running = True
 while running:
     screen.fill(color)
-    font = pygame.font.SysFont('couriernew', 40)
-    text = font.render(str('HELLO'), True, (0,0,0))
+    font = pygame.font.SysFont('couriernew', 20)
+    text = font.render(("your score:"), True, (0,0,0))
+    text_score = font.render(str(score), True, (0, 0, 0))
     screen.blit(text, (5, 5))
+    screen.blit(text_score, (155, 5))
+
 
 
     for event in pygame.event.get():
@@ -37,6 +42,7 @@ while running:
             if target_x < mouse_x < target_x + target_width and target_y < mouse_y < target_y + target_higth:
                 target_x = random.randint(0, SCREEN_WIDTH - target_width)
                 target_y = random.randint(0, SCREEN_HIGTH - target_higth)
+                score += 1
 
     screen.blit(target_img, (target_x, target_y))
 
