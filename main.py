@@ -22,15 +22,20 @@ target_y = random.randint(0, SCREEN_HIGTH - target_higth)
 color = (random.randint(0, 225), random.randint(0, 225), random.randint(0, 225))
 
 score = 0
+bullets = 10
 
 running = True
-while running:
+while running and bullets > 0 and score < 5:
     screen.fill(color)
     font = pygame.font.SysFont('couriernew', 20)
-    text = font.render(("your score:"), True, (0,0,0))
+    text = font.render(("reach 5 hits:"), True, (0,0,0))
     text_score = font.render(str(score), True, (0, 0, 0))
+    text2 = font.render(("bullets:"), True, (0, 0, 0))
+    text_bullets = font.render(str(bullets), True, (0, 0, 0))
     screen.blit(text, (5, 5))
-    screen.blit(text_score, (155, 5))
+    screen.blit(text_score, (175, 5))
+    screen.blit(text2, (5, 35))
+    screen.blit(text_bullets, (155, 35))
 
 
 
@@ -38,15 +43,68 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
+            bullets -= 1
             mouse_x, mouse_y = pygame.mouse.get_pos()
             if target_x < mouse_x < target_x + target_width and target_y < mouse_y < target_y + target_higth:
-                target_x = random.randint(0, SCREEN_WIDTH - target_width)
-                target_y = random.randint(0, SCREEN_HIGTH - target_higth)
+
                 score += 1
+
+
+    target_x = target_x + random.randint(-30, 30)
+    if target_x <=0:
+        target_x = target_x + 30
+    elif target_x >= (SCREEN_WIDTH - target_width):
+        target_x = target_x - 30
+
+    target_y = target_y + random.randint(-30, 30)
+    if target_y <= 0:
+        target_y = target_y + 30
+    elif target_y >= (SCREEN_HIGTH - target_higth):
+        target_y = target_y - 30
+
+
+   # target_x = random.randint(0, SCREEN_WIDTH - target_width)
+    #target_y = random.randint(0, SCREEN_HIGTH - target_higth)
+
+    pygame.time.delay(60)
+
 
     screen.blit(target_img, (target_x, target_y))
 
     pygame.display.update()
+
+if bullets <= 0 and score < 10:
+    final_running = True
+    while final_running:
+        screen.fill(color)
+        font = pygame.font.SysFont('couriernew', 90)
+        gameover = font.render(("game over"), True, (0, 0, 0))
+        screen.blit(gameover, (150, 230))
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                final_running = False
+
+        pygame.display.update()
+
+if score >= 5:
+    win_running = True
+    while win_running:
+        screen.fill(color)
+        font = pygame.font.SysFont('couriernew', 90)
+        win = font.render(("you win!"), True, (0, 0, 0))
+        screen.blit(win, (150, 230))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                win_running = False
+        pygame.display.update()
+
+
+
+
+
+
+
 
 
 pygame.quit()
