@@ -13,7 +13,7 @@ icon = pygame.image.load("img/images.jpg")
 pygame.display.set_icon(icon)
 
 target_img = pygame.image.load("img/1.png")
-target_width = 100
+target_width = 200
 target_higth = 100
 
 target_x = random.randint(0, SCREEN_WIDTH - target_width)
@@ -25,7 +25,7 @@ score = 0
 bullets = 10
 
 running = True
-while running and bullets > 0 and score < 5:
+while running and bullets > 0 and score < 6:
     screen.fill(color)
     font = pygame.font.SysFont('couriernew', 20)
     text = font.render(("reach 6 hits:"), True, (0,0,0))
@@ -83,7 +83,7 @@ while running and bullets > 0 and score < 5:
 
     pygame.display.update()
 
-if bullets <= 0 and score < 10:
+if bullets <= 0 and score < 6:
     final_running = True
     while final_running:
         screen.fill(color)
