@@ -8,7 +8,7 @@ SCREEN_WIDTH = 800
 SCREEN_HIGTH = 600
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HIGTH))
 
-pygame.display.set_caption("Игра Тир")
+pygame.display.set_caption("Chemical Shooting")
 icon = pygame.image.load("img/images.jpg")
 pygame.display.set_icon(icon)
 
@@ -28,9 +28,9 @@ running = True
 while running and bullets > 0 and score < 5:
     screen.fill(color)
     font = pygame.font.SysFont('couriernew', 20)
-    text = font.render(("reach 5 hits:"), True, (0,0,0))
+    text = font.render(("reach 6 hits:"), True, (0,0,0))
     text_score = font.render(str(score), True, (0, 0, 0))
-    text2 = font.render(("bullets:"), True, (0, 0, 0))
+    text2 = font.render(("electrons:"), True, (0, 0, 0))
     text_bullets = font.render(str(bullets), True, (0, 0, 0))
     screen.blit(text, (5, 5))
     screen.blit(text_score, (175, 5))
@@ -48,6 +48,16 @@ while running and bullets > 0 and score < 5:
             if target_x < mouse_x < target_x + target_width and target_y < mouse_y < target_y + target_higth:
 
                 score += 1
+                if score == 1:
+                    target_img = pygame.image.load("img/2.png")
+                elif score == 2:
+                    target_img = pygame.image.load("img/3.png")
+                elif score == 3:
+                    target_img = pygame.image.load("img/4.png")
+                elif score == 4:
+                    target_img = pygame.image.load("img/5.png")
+                elif score == 5:
+                    target_img = pygame.image.load("img/6.png")
 
 
     target_x = target_x + random.randint(-30, 30)
@@ -87,7 +97,7 @@ if bullets <= 0 and score < 10:
 
         pygame.display.update()
 
-if score >= 5:
+if score >= 6:
     win_running = True
     while win_running:
         screen.fill(color)
